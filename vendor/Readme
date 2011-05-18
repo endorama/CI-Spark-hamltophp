@@ -1,0 +1,11 @@
+In this folder you have to puth the `haml` directory inside haml-to-php 
+package.
+
+Haml-To-Php:
+-> haml
+-> haml-example
+-> test
+
+Grab the `haml` directory and copy here.
+
+/vendor/haml/...
