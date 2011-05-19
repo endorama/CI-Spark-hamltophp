@@ -1,6 +1,7 @@
 # What is
 
 A CodeIgniter Spark to integrate Haml-To-Php library into CodeIgniter.
+Installable via Sparks system ( [http://getsparks.org](http://getsparks.org GetSparks)
 
 # Why
 
@@ -24,7 +25,7 @@ In `application/config/autoload.php` add `hamltophp/x.x.x` to `$autoload['sparks
 
 That's it! Now Haml Spark is available
 
-# Usage example
+## Usage example standalone
 
 Inside a controller you can use a function similar to this:  
 `
@@ -44,24 +45,39 @@ and this makes very easy to add hamltophp parser to CI.
 
 To do this simply add this code in the `application/config/template.php` file
 used by CI Template Class to defined the parser to use:  
-`// Added by Haml-To-Php Spark
-$config['active_template'] = 'haml';
+    // Added by Haml-To-Php Spark
+    $config['active_template'] = 'haml';
 
-$config['haml']['template'] = 'template.haml';
-$config['haml']['regions'] = array(
-   'header',
-   'content',
-   'sidebar',
-   'footer',
-);
-$config['haml']['parser'] = 'hamltophp';
-$config['haml']['parser_method'] = 'parse';
-$config['haml']['parse_template'] = TRUE;`
+    $config['haml']['template'] = 'template.haml';
+    $config['haml']['regions'] = array(
+       'header',
+       'content',
+       'sidebar',
+       'footer',
+    );
+    $config['haml']['parser'] = 'hamltophp';
+    $config['haml']['parser_method'] = 'parse';
+    $config['haml']['parse_template'] = TRUE;
 
 This lines tells the Template class to use `Hamltophp->parse()` to parse
 template files instead of the CI Parser class. Also enable parsing of the
 mail template file, so that a `template.haml` file is usable inside the
 views folder as main template file.
+
+## Usage example with CI Template Class
+
+    public function haml()  {
+      $data = array(
+        "title" => "title added by me",
+        'stuff' => 'things'
+      );
+        
+      // remember to use Template->parse_view() to parse view file instead of write/write_view
+      $this->template->parse_view('content', 'content.haml', $data);
+      $this->template->parse_view('sidebar', 'sidebar.haml', $data);
+
+      $this->template->render(); // Just render the 'content' region
+    }
 
 # Dependencies
 

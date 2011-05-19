@@ -1,8 +1,0 @@
-# What is this
-
-A CodeIgniter Spark to integrate Haml-To-Php library into CodeIgniter.
-
-# Dependencies
-
-CodeIgniter Template Class ( by Colin Williams )  
-http://williamsconcepts.com/ci/codeigniter/libraries/template/
