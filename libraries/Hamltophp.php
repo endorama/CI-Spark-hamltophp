@@ -154,11 +154,18 @@ class Hamltophp {
 /*  PUBLIC FUNCTION
  ************************************************/
 
+  /**
+   *  Parse a Haml template and return rendered content
+   * 
+   *  @param  string $template the filename of the file to be parsed
+   *  @param  array $data an array whit variables to be used inside the
+   *    template. In the template there is not the array, but variables
+   *    called like array keys.
+   * 
+   *  @return string the parsed HTML/PHP content
+   */
   function parse($template, $data = array()) {
-    $out = $this->parser->haml($template, $data);
-    
-    return $out;
-    
+    return $this->parser->haml($template, $data);;
   }
   
 

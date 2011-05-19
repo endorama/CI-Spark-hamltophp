@@ -4,7 +4,7 @@
  * Add this lines to the end of application/config/template.php
  *--------------------------------------------------------------------*/
 
-// Added by Haml-To-Php binder
+// Added by Haml-To-Php Spark
 $config['active_template'] = 'haml';
 
 $config['haml']['template'] = 'template.haml';
