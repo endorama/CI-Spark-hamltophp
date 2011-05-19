@@ -12,8 +12,15 @@
  *  @return string the HTML+PHP rendered version of the partial
  */
 function render_partial($partial, $data = array(), $ext = "haml")  {
-  $haml = new Hamltophp();
+  $haml = Hamltophp::get_instance();
   return $haml->parse($partial . "." . $ext, $data);
 }
+
+/**
+ *  Grab the specified assets ( one or more )
+ * 
+ *  Depends from assets Spark
+ */
+//function assets($resource, $type) {} # not implemented yet
 
 ?>

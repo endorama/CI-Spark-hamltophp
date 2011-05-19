@@ -1,7 +1,7 @@
 # What is
 
 A CodeIgniter Spark to integrate Haml-To-Php library into CodeIgniter.
-Installable via Sparks system ( [http://getsparks.org](http://getsparks.org GetSparks)
+Installable via Sparks system ( [http://getsparks.org](http://getsparks.org GetSparks) )
 
 # Why
 

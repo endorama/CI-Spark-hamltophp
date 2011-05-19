@@ -2,6 +2,7 @@
 
 /*----------------------------------------------------------------------
  * Add this lines to the end of application/config/template.php
+ * if you intend to use CI Template Class
  *--------------------------------------------------------------------*/
 
 // Added by Haml-To-Php Spark

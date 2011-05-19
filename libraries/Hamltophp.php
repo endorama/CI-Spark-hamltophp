@@ -33,7 +33,7 @@
  *  @subpackage Libraries
  *  @category   Libraries
  * 
- *  @version    0.0.1 - dev
+ *  @version    0.0.2
  *  @author     Edoardo Tenani <edoardo.tenani@gmail.com>
  *  @license    GNU Public License 2.0 or greater
  *              <http://opensource.org/licenses/gpl-2.0.php>
@@ -41,38 +41,54 @@
  *  @link       
  */
  
-define('HAMLTOPHP_VERSION', '0.0.1');
+define('HAMLTOPHP_VERSION', '0.0.2');
  
 require_once BASEPATH . "../sparks/hamltophp/" . HAMLTOPHP_VERSION . "/vendor/haml/Haml.php";
  
 class Hamltophp {
   
+  /**
+   *  Handles Hamltophp instances
+   *
+   *  @access private
+   *  @var    object
+   */
+  private static $instance;
+  
+  /**
+   *  Handles Haml-To-Php library parser
+   * 
+   *  @access public
+   *  @var    object
+   */
   public $parser;
   
+  
   function __construct() {
+    self::$instance = $this;
+    
     $CI =& get_instance();
     
-    $CI->config->load('hamltophp');
+    $CI->config->load("hamltophp");
     
     $this->parser = new HamlFileCache($CI->config->item("htp_haml_dir"), $CI->config->item("htp_cache_dir"));
     
-    // update cache on each request
-    if ( $htp_cache = $CI->config->item("htp_cache") )
-      $this->parser->forceUpdate = $htp_cache; 
-    else
-      $this->parser->forceUpdate = FALSE;
-      
-    // somewhat more pretty HTML - usually you want to switch it off
-    if ( $ugly = $CI->config->item("htp_ugly") )
-      $this->parser->options['ugly'] = $ugly;
-    else
-      $this->parser->options['ugly'] = TRUE;
-
-    // not escape html char in scripts - ususally is on
-    $this->parser->options['escape_html'] = false;
-    
+    if ( isset ($CI->config) && !empty($CI->config) ) {
+      $this->parser->options["format"] = $CI->config->item("format");
+      $this->parser->options["escape_html"] = $CI->config->item("escape_html");
+      $this->parser->options["htp_ugly"] = $CI->config->item("htp_ugly");
+      $this->parser->options["suppress_eval"] = $CI->config->item("suppress_eval");
+      $this->parser->options["attr_wrapper"] = $CI->config->item("attr_wrapper");
+      $this->parser->options["autoclose"] = $CI->config->item("autoclose");
+      $this->parser->options["ugly"] = $CI->config->item("htp_ugly");
+      $this->parser->options["filters"] = $CI->config->item("filters");
+      $this->parser->forceUpdate = $CI->config->item("htp_cache"); 
+    }
     
     $CI->load->helper("hamltophp");
+    
+    if ( file_exists(APPPATH . "library/Template.php") )
+      $CI->load->library("template");
   }
   
 /*  OBJECT FUNCTION OVERRIDE
@@ -150,7 +166,22 @@ class Hamltophp {
     return $this->{$var};
   }
 
-
+/*  STATIC FUNCTION
+ ************************************************/
+ 
+  /**
+   *  Check if an instance of the class is available and return it.
+   * 
+   *  If the class has not already been initialized initialized it.
+   */
+  static public function get_instance()  {
+    if ( !isset(self::$instance) ) {
+      $c = __CLASS__;
+      new $c;
+    }
+    return self::$instance;
+  }
+ 
 /*  PUBLIC FUNCTION
  ************************************************/
 

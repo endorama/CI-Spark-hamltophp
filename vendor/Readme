@@ -1,11 +1,18 @@
 In this folder you have to puth the `haml` directory inside haml-to-php 
 package.
 
-Haml-To-Php:
--> haml
--> haml-example
--> test
+Haml-To-Php file structure:
+.
+├── haml
+│   ├── HamlParser.php
+│   └── Haml.php
+├── haml-example
+└── test
 
 Grab the `haml` directory and copy here.
-
-/vendor/haml/...
+.
+└── vendor
+    ├── haml
+    │   ├── HamlParser.php
+    │   └── Haml.php
+    └── Readme
