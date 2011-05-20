@@ -28,14 +28,14 @@ That's it! Now Haml Spark is available
 ## Usage example standalone
 
 Inside a controller you can use a function similar to this:  
-`
-public function onlyhaml()  {
-  // Hamltophp->parse ( $template file, $variable passed to view )
-  echo $this->hamltophp->parse("template.haml", array(
-    "content" => "this is the content",
-    "sidebar" => "this is the sidebar",
-  ));
-}`
+
+    public function onlyhaml()  {
+      // Hamltophp->parse ( $template file, $variable passed to view )
+      echo $this->hamltophp->parse("template.haml", array(
+        "content" => "this is the content",
+        "sidebar" => "this is the sidebar",
+      ));
+    }
 
 # Usage with CI Template Class
 
