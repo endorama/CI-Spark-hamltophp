@@ -79,12 +79,11 @@ class Hamltophp {
     $CI->config->load("hamltophp");
     $this->config = $CI->config->item("hamltophp");
     
-    $this->parser = new HamlFileCache($CI->config->item("haml_dir"), $CI->config->item("cache_dir"));
+    $this->parser = new HamlFileCache($this->config["haml_dir"], $this->config["cache_dir"]);
     
     if ( isset ($CI->config) && !empty($CI->config) ) {
       $this->parser->options["format"] = $this->config["format"];
       $this->parser->options["escape_html"] = $this->config["escape_html"];
-      $this->parser->options["htp_ugly"] = $this->config["htp_ugly"];
       $this->parser->options["suppress_eval"] = $this->config["suppress_eval"];
       $this->parser->options["attr_wrapper"] = $this->config["attr_wrapper"];
       $this->parser->options["autoclose"] = $this->config["autoclose"];

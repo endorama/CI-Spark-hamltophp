@@ -4,7 +4,7 @@
  *  See http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html
  */
 
-$config["hatmltophp"] = array (
+$config["hamltophp"] = array (
 
 /*  Determines the output format. Default is XHTML 1.0
  *  Options:
