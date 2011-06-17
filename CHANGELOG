@@ -1,0 +1,11 @@
+17-06-2011  Edoardo Tenani  <edoardo.tenani@gmail.com>
+
+ * Modified option array $config. Now all options are in a $config["hamltophp"]
+    array
+ * Modified library/Hamltophp.php to accept new option values 
+
+12-06-2011  Edoardo Tenani  <edoardo.tenani@gmail.com>
+
+ * Modified option $config["escape_html"] to FALSE by default
+
+

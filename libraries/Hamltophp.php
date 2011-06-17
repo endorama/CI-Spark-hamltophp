@@ -33,7 +33,7 @@
  *  @subpackage Libraries
  *  @category   Libraries
  * 
- *  @version    0.0.2
+ *  @version    0.0.3
  *  @author     Edoardo Tenani <edoardo.tenani@gmail.com>
  *  @license    GNU Public License 2.0 or greater
  *              <http://opensource.org/licenses/gpl-2.0.php>
@@ -41,7 +41,7 @@
  *  @link       
  */
  
-define('HAMLTOPHP_VERSION', '0.0.2');
+define('HAMLTOPHP_VERSION', '0.0.3');
  
 require_once BASEPATH . "../sparks/hamltophp/" . HAMLTOPHP_VERSION . "/vendor/haml/Haml.php";
  
@@ -63,6 +63,13 @@ class Hamltophp {
    */
   public $parser;
   
+  /**
+   *  Configuration for Hamltophp
+   * 
+   *  @access protected
+   *  @var    array
+   */
+  protected $config;
   
   function __construct() {
     self::$instance = $this;
@@ -70,19 +77,20 @@ class Hamltophp {
     $CI =& get_instance();
     
     $CI->config->load("hamltophp");
+    $this->config = $CI->config->item("hamltophp");
     
-    $this->parser = new HamlFileCache($CI->config->item("htp_haml_dir"), $CI->config->item("htp_cache_dir"));
+    $this->parser = new HamlFileCache($CI->config->item("haml_dir"), $CI->config->item("cache_dir"));
     
     if ( isset ($CI->config) && !empty($CI->config) ) {
-      $this->parser->options["format"] = $CI->config->item("format");
-      $this->parser->options["escape_html"] = $CI->config->item("escape_html");
-      $this->parser->options["htp_ugly"] = $CI->config->item("htp_ugly");
-      $this->parser->options["suppress_eval"] = $CI->config->item("suppress_eval");
-      $this->parser->options["attr_wrapper"] = $CI->config->item("attr_wrapper");
-      $this->parser->options["autoclose"] = $CI->config->item("autoclose");
-      $this->parser->options["ugly"] = $CI->config->item("htp_ugly");
-      $this->parser->options["filters"] = $CI->config->item("filters");
-      $this->parser->forceUpdate = $CI->config->item("htp_cache"); 
+      $this->parser->options["format"] = $this->config["format"];
+      $this->parser->options["escape_html"] = $this->config["escape_html"];
+      $this->parser->options["htp_ugly"] = $this->config["htp_ugly"];
+      $this->parser->options["suppress_eval"] = $this->config["suppress_eval"];
+      $this->parser->options["attr_wrapper"] = $this->config["attr_wrapper"];
+      $this->parser->options["autoclose"] = $this->config["autoclose"];
+      $this->parser->options["ugly"] = $this->config["ugly"];
+      $this->parser->options["filters"] = $this->config["filters"];
+      $this->parser->forceUpdate = $this->config["cache"]; 
     }
     
     $CI->load->helper("hamltophp");
@@ -196,7 +204,7 @@ class Hamltophp {
    *  @return string the parsed HTML/PHP content
    */
   function parse($template, $data = array()) {
-    return $this->parser->haml($template, $data);;
+    return $this->parser->haml($template, $data);
   }
   
 
