@@ -1,3 +1,7 @@
+# Note
+
+**NOTE**: Haml-To-Php does not exists anymore. This spark will be left for instructional purpose only. "
+
 # What is
 
 A CodeIgniter Spark to integrate Haml-To-Php library into CodeIgniter.
